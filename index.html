@@ -44,7 +44,16 @@
   <footer id="footer">
     Copyright (c) 2017 <a href="/" tabindex="2"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
   </footer>
+<script>
+  if ('serviceWorker' in navigator)  {
+    navigator.serviceWorker.register('/sw.js').then(function() {
+        console.log('serviceworker register success!');
+    }).catch(function() {
+        console.log('serviceworker register failed!');
+    });
+}
 
+</script>
 </body>
 
 </html>
