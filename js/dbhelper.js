@@ -4,7 +4,7 @@
 class DBHelper {
   
   static get UseServerAPI(){
-    return true; // set to false if i need to switch to /data/restaurants.json
+    return false; // set to false if i need to switch to /data/restaurants.json
   }
   /**
    * Database URL.
