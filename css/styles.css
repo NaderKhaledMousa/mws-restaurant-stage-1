@@ -42,7 +42,7 @@ select:focus, select:hover{
     box-shadow: 5px 8px orange;
 }
 
-.filter-options select > a:hover. .filter-options select > a:focus{
+.filter-options select > a:hover .filter-options select > a:focus{
     color: red;
 }
 
