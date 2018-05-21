@@ -64,6 +64,9 @@ nav h1 a {
   font-weight: 200;
   letter-spacing: 10px;
   text-transform: uppercase;
+  max-width: 200px;
+   max-height: 48px;
+  padding: 1.5em;
 }
 #breadcrumb {
     padding: 10px 40px 16px;
@@ -272,4 +275,7 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+img.restaurant-img{
+     max-width:100%;
 }
