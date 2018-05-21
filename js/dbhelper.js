@@ -2,14 +2,26 @@
  * Common database helper functions.
  */
 class DBHelper {
-
+  
+  static get UseServerAPI(){
+    return true; // set to false if i need to switch to /data/restaurants.json
+  }
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
-    const port = 8000 // Change this to your server port
-    return `http://localhost:${port}/data/restaurants.json`;
+    let url = '';
+    if (this.UseServerAPI) {
+      const port = 1337 // Change this to your server port
+
+      url= `http://localhost:${port}/restaurants`; // call server Api
+    } else {
+      const port = 8000 // Change this to your server port
+
+      url= `http://localhost:${port}/data/restaurants.json`;
+    }
+    return url;
   }
 
   /**
@@ -20,8 +32,11 @@ class DBHelper {
     xhr.open('GET', DBHelper.DATABASE_URL);
     xhr.onload = () => {
       if (xhr.status === 200) { // Got a success response from server!
+
         const json = JSON.parse(xhr.responseText);
-        const restaurants = json.restaurants;
+        // check if use server api then we don't need json.restaurants
+        const restaurants = this.UseServerAPI ? json :  json.restaurants; 
+        
         callback(null, restaurants);
       } else { // Oops!. Got an error from server.
         const error = (`Request failed. Returned status of ${xhr.status}`);
@@ -150,7 +165,14 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
-    return (`/img/${restaurant.photograph}`);
+    let path ='';
+
+    if(this.UseServerAPI){
+      path= (`/img/${restaurant.photograph}.jpg`);
+    }else{
+      path= (`/img/${restaurant.photograph}`);
+    }
+    return path;
   }
 
   /**
